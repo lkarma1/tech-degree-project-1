@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Eric Jones's Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Muli%7CRoboto:400,300,500,700,900" rel="stylesheet"></head>
+
+  <body>
+    <div class="main-nav">
+        <ul class="nav">
+          <li class="name"><a href="index.html">Eric Jones</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <header>
+      <img src="images/me.jpg" alt="Eric Headshot" class="profile-image">
+      <h1 class="tag name">Hello, I’m Eric.</h1>
+      <p class="tag location">Feel free to contact me below!</p>
+    </header>
+
+    <div class="form-submit">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-4">
+            <form id="contact-form" action="mail-contact.php" method="post" name="contact_form">
+              <div class="form-group">
+                <input class="form-control requiredField" id="first_name" name="first_name" placeholder="First Name*" type="text"/>
+              </div>
+              <div class="form-group">
+                <input class="form-control requiredField" id="last_name" name="last_name" placeholder="Last Name*" type="text"/>
+              </div>
+              <div class="form-group">
+                <input class="form-control requiredField" id="email_address" name="email_address" placeholder="Email Address (you@yourdomain.com)*" type="email"/>
+              </div>
+              <div class="form-group">
+                <input class="form-control requiredField" id="telephone_number" name="telephone_number" placeholder="Phone Number*" type="tel"/>
+              </div>        
+              <div class="form-group">
+                <input class="form-control requiredField" id="message" name="message" placeholder="Your message*" type="text"/>
+              </div>                             
+              <div class="form-group">
+                <div>
+                  <button class="btn btn-primary" name="submit" type="submit">Send</button>
+                  <p class="contact-send-message"></p>
+                </div>
+              </div>
+            </form>
+          </div><!-- ./col -->    
+        </div><!-- ./row -->    
+      </div><!-- ./container -->    
+    </div> 
+    <footer>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/ericsjones" class="social linkedin">LinkedIn</a></li>
+        <li><a href="https://github.com/lkarma1" class="social github">Github</a></li>
+      </ul>
+      <p class="copyright">Copyright 2018, Eric Jones</p>
+    </footer>
+    <script src="ajax-contact.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+      //"contact-form" is the id of the form
+$("#contact-form").submit(function() {
+
+    var url = "mail-contact.php"; // the script where you handle the form input.
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           // serialize your form's elements.
+           data: $("#contact-form").serialize(), 
+           success: function(data)
+           {
+               // "form-submit" is the class of your form wrapper
+               $('.form-submit').html(data);
+           }
+         });
+    // avoid to execute the actual submit of the form.
+    return false;
+});
+
+    </script>
+
+  </body>
+  </html>
